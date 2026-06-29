@@ -240,7 +240,7 @@ const WEBHOOK_DATA='https://pgiacomelli2506.app.n8n.cloud/webhook/flujo-data';
 const WEBHOOK_AI='https://pgiacomelli2506.app.n8n.cloud/webhook/flujo-ai-analysis';
 const API_KEY='mahra-stk-9F3K2P7Q-2026';
 const CACHE_KEY='mahra_flujo_cache_v1';
-const CACHE_TTL_MS=7*24*60*60*1000;
+const CACHE_TTL_MS=30*24*60*60*1000;
 const MESES=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
 
 let gastosCat=[],ingresosCat=[],movimientos=[];
@@ -574,8 +574,9 @@ function showError(m){const e=document.getElementById('errorMsg');e.textContent=
 function hideError(){document.getElementById('errorMsg').style.display='none';}
 
 const hadCache=loadCache();
-if(hadCache)setStatus('📦 Cache local',null);
-window.addEventListener('load',()=>{loadAllData();});
+if(hadCache){setStatus('📦 Cache local · presioná Cargar para actualizar',null);}
+else{setStatus('Sin datos · presioná Cargar',null);renderAll();}
+// Sin auto-consulta al abrir: el webhook se llama SOLO con el botón Cargar (ahorra ejecuciones n8n).
 </script>
 </body>
 </html>
